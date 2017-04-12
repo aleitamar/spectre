@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  get '/' => redirect('/projects')
+  get '/', to: 'projects#index'
 
   resources :projects, param: :slug, only: [:index] do
     resources :suites, param: :slug, only: [:show] do
