@@ -1,5 +1,7 @@
 class MiddlewareHealthcheck
-  OK_RESPONSE = [ 200, { 'Content-Type' => 'text/plain' }, ["It's alive!".freeze] ]
+  RESPONSE_STR = "It's alive!"
+  # RESPONSE_STR = ENV.to_json
+  OK_RESPONSE = [ 200, { 'Content-Type' => 'application/json' }, [ RESPONSE_STR ] ]
 
   def initialize(app)
     @app = app
@@ -12,4 +14,4 @@ class MiddlewareHealthcheck
       @app.call(env)
     end
   end
-end 
+end
