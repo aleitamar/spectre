@@ -12,11 +12,7 @@ Dragonfly.app.configure do
   if ENV['DRAGONFLY_S3_DATASTORE']
     datastore :s3,
       bucket_name: ENV['DRAGONFLY_S3_BUCKET'],
-      region: ENV['DRAGONLY_S3_REGION'],
-      url_scheme: ENV['DRAGONLY_S3_URL_SCHEME'] || 'http',
-      use_iam_profile: ENV['DRAGONLY_S3_USE_IAM'] == 'true',
-      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+      region: ENV['DRAGONLY_S3_REGION']
   else
     datastore :file,
       root_path: Rails.root.join('public/system/dragonfly', Rails.env),
