@@ -75,6 +75,7 @@ class Test < ActiveRecord::Base
 
   def default_values
     self.diff ||= 0
+    self.diff_threshold ||= 0.1
     self.pass ||= false
     self.fuzz_level = '30%' if self.fuzz_level.blank?
     self.highlight_colour = 'ff0000' if self.highlight_colour.blank?
