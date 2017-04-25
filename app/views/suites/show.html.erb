@@ -17,6 +17,7 @@
       <th>Run</th>
       <th>Date</th>
       <th>Result</th>
+      <th>Browsers</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +35,9 @@
           <% if run.failing_tests > 0 %>
             <a class="label label--fail" href="<%= project_suite_run_path(run.suite.project, run.suite, run, params: { status: 'fail' }) %>"><%= run.failing_tests %> failed</a>
           <% end %>
+        </td>
+        <td>
+          <span class="text-muted"><%= run.browsers.join(',') %></span>
         </td>
       </tr>
     <% end %>
@@ -62,4 +66,3 @@
     <% end %>
   </tbody>
 </table>
-

@@ -10,6 +10,7 @@
       <th>Name</th>
       <th>Suite</th>
       <th>Last run</th>
+      <th>Browsers</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +29,9 @@
           <% if suite.latest_run.failing_tests > 0 %>
             <a class="label label--fail" href="<%= project_suite_run_path(suite.project, suite, suite.latest_run, params: { status: 'fail' }) %>"><%= suite.latest_run.failing_tests %> failed</a>
           <% end %>
+        </td>
+        <td>
+          <span class="text-muted"><%= suite.latest_run.browsers.join(',') %></span>
         </td>
       </tr>
       <% end %>

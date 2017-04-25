@@ -30,6 +30,10 @@ class Run < ActiveRecord::Base
     Rails.application.routes.url_helpers.project_suite_run_path(self.suite.project, self.suite, self)
   end
 
+  def browsers
+    self.tests.pluck(:browser).uniq
+  end
+
   private
 
   def purge_old_runs
