@@ -5,6 +5,8 @@ class Suite < ActiveRecord::Base
   has_many :baselines, dependent: :destroy
   after_initialize :create_slug
 
+  SPECTRE_RUN_HISTORY_SIZE = ENV.fetch('SPECTRE_RUN_HISTORY_SIZE', 5).to_i
+
   def latest_run
     runs.order(id: :desc).first
   end
@@ -18,6 +20,6 @@ class Suite < ActiveRecord::Base
   end
 
   def purge_old_runs
-    self.runs.order(id: :desc).offset(5).destroy_all
+    self.runs.order(id: :desc).offset(SPECTRE_RUN_HISTORY_SIZE).destroy_all
   end
 end
