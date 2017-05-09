@@ -8,7 +8,11 @@ class Suite < ActiveRecord::Base
   SPECTRE_RUN_HISTORY_SIZE = ENV.fetch('SPECTRE_RUN_HISTORY_SIZE', 5).to_i
 
   def latest_run
-    runs.order(id: :desc).first
+    latest_runs(1).first
+  end
+
+  def latest_runs(limit)
+    runs.order(id: :desc).limit(limit)
   end
 
   def create_slug
