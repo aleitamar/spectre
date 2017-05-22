@@ -1,6 +1,10 @@
 include ActionDispatch::TestProcess
 
 FactoryGirl.define do
+  factory :thumb do
+    uid "MyString"
+    signature "MyString"
+  end
   factory :project do
     name 'spec_project'
     slug 'spec_project_slug'

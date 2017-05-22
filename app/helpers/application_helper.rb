@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def thumbnail(thumbnail)
-    "<img class='lazy' data-original='#{thumbnail.remote_url}' width='#{Thumb::DEFAULT_WIDTH}px' />".html_safe rescue ''
+    "<img class='lazy' data-original='#{thumbnail.url}' width='#{Thumb::DEFAULT_WIDTH}px' />".html_safe rescue ''
   end
 
   def format_date(date)

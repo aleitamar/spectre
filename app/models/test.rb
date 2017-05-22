@@ -4,23 +4,22 @@ class Test < ActiveRecord::Base
   after_save :update_baseline
   belongs_to :run
   default_scope { order(:created_at) }
-
-  dragonfly_accessor :screenshot do
-    # copy_to(:screenshot_thumbnail){|a| Thumb.create(a) }
-  end
-  dragonfly_accessor :screenshot_thumbnail
-
-  dragonfly_accessor :screenshot_baseline do
-    copy_to(:screenshot_baseline_thumbnail){|a| Thumb.create(a) }
-  end
-  dragonfly_accessor :screenshot_baseline_thumbnail
-
-  dragonfly_accessor :screenshot_diff do
-    copy_to(:screenshot_diff_thumbnail){|a| Thumb.create(a) }
-  end
-  dragonfly_accessor :screenshot_diff_thumbnail
-
+  dragonfly_accessor :screenshot
+  dragonfly_accessor :screenshot_baseline
+  dragonfly_accessor :screenshot_diff
   validates :name, :browser, :size, :run, presence: true
+
+  def screenshot_thumbnail
+    Thumb.generate(screenshot)
+  end
+
+  def screenshot_baseline_thumbnail
+    Thumb.generate(screenshot_baseline)
+  end
+
+  def screenshot_diff_thumbnail
+    Thumb.generate(screenshot_diff)
+  end
 
   def self.find_last_five_by_key(key)
     where(key: key).unscoped.order(created_at: :desc).limit(5)
