@@ -12,7 +12,9 @@ Dragonfly.app.configure do
   if ENV['DRAGONFLY_S3_DATASTORE']
     datastore :s3,
       bucket_name: ENV['DRAGONFLY_S3_BUCKET'],
-      region: ENV['DRAGONLY_S3_REGION']
+      region: ENV['DRAGONLY_S3_REGION'],
+      acl: 'public-read',
+      storge_class: 'REDUCED_REDUNDANCY'
   else
     datastore :file,
       root_path: Rails.root.join('public/system/dragonfly', Rails.env),
