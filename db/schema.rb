@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424124200) do
+ActiveRecord::Schema.define(version: 20170522120729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,10 +22,11 @@ ActiveRecord::Schema.define(version: 20170424124200) do
     t.string   "size"
     t.integer  "suite_id"
     t.string   "screenshot_uid"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.string   "key"
     t.integer  "test_id"
+    t.string   "screenshot_thumbnail_uid"
   end
 
   add_index "baselines", ["suite_id"], name: "index_baselines_on_suite_id", using: :btree
@@ -60,8 +61,8 @@ ActiveRecord::Schema.define(version: 20170424124200) do
     t.string   "size"
     t.integer  "run_id"
     t.float    "diff"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "screenshot_uid"
     t.string   "screenshot_baseline_uid"
     t.string   "screenshot_diff_uid"
@@ -72,6 +73,9 @@ ActiveRecord::Schema.define(version: 20170424124200) do
     t.string   "highlight_colour"
     t.string   "crop_area"
     t.float    "diff_threshold"
+    t.string   "screenshot_thumbnail_uid"
+    t.string   "screenshot_baseline_thumbnail_uid"
+    t.string   "screenshot_diff_thumbnail_uid"
   end
 
   add_index "tests", ["run_id"], name: "index_tests_on_run_id", using: :btree
