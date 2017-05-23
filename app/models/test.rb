@@ -2,6 +2,7 @@ class Test < ActiveRecord::Base
   after_initialize :default_values
   after_create :create_key
   after_save :update_baseline
+  before_destroy :delete_thumbs
   belongs_to :run
   default_scope { order(:created_at) }
   dragonfly_accessor :screenshot
@@ -19,6 +20,12 @@ class Test < ActiveRecord::Base
 
   def screenshot_diff_thumbnail
     Thumb.generate(screenshot_diff)
+  end
+
+  def delete_thumbs
+    Thumb.delete(screenshot_thumbnail)
+    Thumb.delete(screenshot_baseline_thumbnail)
+    Thumb.delete(screenshot_diff_thumbnail)
   end
 
   def self.find_last_five_by_key(key)
