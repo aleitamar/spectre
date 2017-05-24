@@ -11,21 +11,21 @@ class Test < ActiveRecord::Base
   validates :name, :browser, :size, :run, presence: true
 
   def screenshot_thumbnail
-    Thumb.generate(screenshot)
+    screenshot ? Thumb.generate(screenshot) : nil
   end
 
   def screenshot_baseline_thumbnail
-    Thumb.generate(screenshot_baseline)
+    screenshot_baseline ? Thumb.generate(screenshot_baseline) : nil
   end
 
   def screenshot_diff_thumbnail
-    Thumb.generate(screenshot_diff)
+    screenshot_diff ? Thumb.generate(screenshot_diff) : nil
   end
 
   def delete_thumbs
-    Thumb.delete(screenshot_thumbnail)
-    Thumb.delete(screenshot_baseline_thumbnail)
-    Thumb.delete(screenshot_diff_thumbnail)
+    Thumb.delete(screenshot_thumbnail) if screenshot_thumbnail
+    Thumb.delete(screenshot_baseline_thumbnail) if screenshot_baseline_thumbnail
+    Thumb.delete(screenshot_diff_thumbnail) if screenshot_diff_thumbnail
   end
 
   def self.find_last_five_by_key(key)
