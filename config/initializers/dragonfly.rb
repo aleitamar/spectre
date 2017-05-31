@@ -36,10 +36,13 @@ Dragonfly.app.configure do
   # Before serving from the local Dragonfly server...
   before_serve do |job, env|
     # ...store the thumbnail in the datastore...
-    uid = job.store
-
-    # ...keep track of its uid so next time we can serve directly from the datastore
-    Thumb.create!(uid: uid, signature: job.signature)
+    begin
+      uid = job.store
+      # ...keep track of its uid so next time we can serve directly from the datastore
+      Thumb.create!(uid: uid, signature: job.signature)
+    rescue Dragonfly::Job::Fetch::NotFound => _
+      # do nothing, original image was already deleted
+    end
   end
 
 end
