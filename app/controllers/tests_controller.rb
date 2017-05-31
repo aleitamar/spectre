@@ -28,17 +28,21 @@ class TestsController < ApplicationController
   def find_or_create_test(test_params)
     search_params = test_params.slice(:name, :browser, :size, :run_id)
     if test = Test.find_by(search_params)
-      test_params.each do |k, v|
+      non_empty_test_params.each do |k, v|
         test.send("#{k}=", v) if test.respond_to?("#{k}=")
       end
       test.save!
     else
-      test = Test.create!(test_params)
+      test = Test.create!(non_empty_test_params)
     end
     test
   end
 
   def test_params
     params.require(:test).permit(:name, :browser, :size, :screenshot, :run_id, :source_url, :fuzz_level, :highlight_colour, :crop_area, :diff_threshold)
+  end
+
+  def non_empty_test_params
+    test_params.reject { |k, v| v.blank? }
   end
 end
