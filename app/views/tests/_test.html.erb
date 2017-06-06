@@ -7,9 +7,9 @@
       </small>
     </p>
   </th>
-  <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_baseline_thumbnail), test.screenshot_baseline.remote_url, class: 'test__image') %></td>
-  <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_thumbnail), test.screenshot.remote_url, class: 'test__image') %></td>
-  <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_diff_thumbnail), test.screenshot_diff.remote_url, class: 'test__image') %></td>
+  <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_baseline_thumbnail), screenshot_url(test.screenshot_baseline), class: 'test__image') %></td>
+  <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_thumbnail), screenshot_url(test.screenshot), class: 'test__image') %></td>
+  <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_diff_thumbnail), screenshot_url(test.screenshot_diff), class: 'test__image') %></td>
   <td>
     <span class="test__diff text-muted"><%= test.diff == 0 ? 'No' : "#{test.diff}%" %> difference</span>
     <span class="test__status label label--<%= test.pass? ? 'pass' : 'fail' %>"><%= test.pass? ? 'Pass' : 'Fail' %></span>
