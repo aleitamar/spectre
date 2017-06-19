@@ -76,7 +76,7 @@ class Test < ActiveRecord::Base
   end
 
   def update_baseline
-    return unless self.pass && self.diff == 0
+    return unless self.pass
     Baseline.find_or_initialize_by(key: self.key).update_attributes!(
       key: self.key,
       name: self.name,
