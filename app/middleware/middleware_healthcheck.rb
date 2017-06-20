@@ -1,16 +1,19 @@
 class MiddlewareHealthcheck
-  RESPONSE_STR = "It's alive!"
-  OK_RESPONSE = [ 200, { 'Content-Type'.freeze => 'application/json'.freeze }, [ RESPONSE_STR.freeze ] ]
+  OK_RESPONSE = [ 200, { 'Content-Type' => 'application/json' }, [ "It's alive!" ] ]
 
   def initialize(app)
     @app = app
   end
 
   def call(env)
-    if env['PATH_INFO'.freeze] == '/healthcheck'.freeze
-      return OK_RESPONSE
-    else
-      @app.call(env)
-    end
+    return OK_RESPONSE if env['PATH_INFO'] == '/healthcheck'
+    dup._call(env)
+  end
+
+  def _call(env)
+    status, headers, body = @app.call(env)
+    [status, headers, body]
+  ensure
+    body.close if body && body.respond_to?(:close) && $!
   end
 end
