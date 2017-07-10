@@ -142,6 +142,10 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.11.0)
+    lograge (0.5.1)
+      actionpack (>= 4, < 5.2)
+      activesupport (>= 4, < 5.2)
+      railties (>= 4, < 5.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.5)
@@ -295,6 +299,7 @@ DEPENDENCIES
   image_size
   jbuilder (~> 2.0)
   jquery-rails
+  lograge
   pg
   poltergeist
   rails (= 4.2.5)
