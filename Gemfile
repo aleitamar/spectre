@@ -60,3 +60,9 @@ group :demo_test_run do
   gem 'rspec'
   gem 'spectre_client', git: 'https://github.com/wearefriday/spectre_client.git'
 end
+
+# Standard Auth0 requirements
+gem 'omniauth', '~> 1.3.1'
+gem 'omniauth-auth0', '~> 1.4.1'
+# Secrets should never be stored in code
+gem 'dotenv-rails', require: 'dotenv/rails-now', group: [:development, :test]

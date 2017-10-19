@@ -4,7 +4,7 @@
 
 <ul class="breadcrumb">
   <li><%= link_to 'Projects', projects_url %></li>
-  <li><%= link_to @suite.project.name, projects_url %></li>
+  <li><%= link_to @suite.project.name, project_url(@suite.project) %></li>
   <li><%= @suite.name %></li>
 </ul>
 

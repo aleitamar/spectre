@@ -1,5 +1,6 @@
 class RunsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :logged_in_using_omniauth?, only: [:create, :new]
 
   def show
     project = Project.find_by_slug!(params[:project_slug])
