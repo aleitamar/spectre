@@ -45,6 +45,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (6.0.3)
+    bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -84,6 +85,12 @@ GEM
     cucumber-wire (0.0.1)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
+    devise (4.2.0)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 5.1)
+      responders
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     domain_name (0.5.20160309)
       unf (>= 0.0.5, < 1.0.0)
@@ -91,15 +98,35 @@ GEM
       addressable (~> 2.3)
       multi_json (~> 1.0)
       rack (>= 1.3.0)
+    dragonfly-s3_data_store (1.3.0)
+      dragonfly (~> 1.0)
+      fog-aws
     erubis (2.7.0)
+    excon (0.60.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.6.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    fog-aws (2.0.0)
+      fog-core (~> 1.38)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-core (1.45.0)
+      builder
+      excon (~> 0.58)
+      formatador (~> 0.2)
+    fog-json (1.0.2)
+      fog-core (~> 1.0)
+      multi_json (~> 1.10)
+    fog-xml (0.1.3)
+      fog-core
+      nokogiri (>= 1.5.11, < 2.0.0)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
+    formatador (0.2.5)
     gherkin (3.2.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -107,8 +134,11 @@ GEM
       tilt
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httparty (0.16.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     image_size (1.4.2)
+    ipaddress (0.8.3)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -119,6 +149,7 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.6)
+    jwt (1.5.6)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -133,10 +164,12 @@ GEM
     minitest (5.8.4)
     multi_json (1.11.2)
     multi_test (0.1.2)
+    multi_xml (0.6.0)
     nested_form (0.3.2)
     netrc (0.11.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    orm_adapter (0.5.0)
     pg (0.18.4)
     poltergeist (1.9.0)
       capybara (~> 2.1)
@@ -193,11 +226,15 @@ GEM
       json (~> 1.4)
     ref (2.0.0)
     remotipart (1.2.1)
+    responders (2.3.0)
+      railties (>= 4.2.0, < 5.1)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rmagick (2.15.4)
+    rollbar (2.15.5)
+      multi_json
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -259,6 +296,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    warden (1.2.6)
+      rack (>= 1.0)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -279,17 +318,22 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   cucumber-rails
   database_cleaner
+  devise
   dragonfly (~> 1.0.12)
+  dragonfly-s3_data_store
   factory_girl_rails (~> 4.0)
+  httparty
   image_size
   jbuilder (~> 2.0)
   jquery-rails
+  jwt
   pg
   poltergeist
   rails (= 4.2.5)
   rails_admin
   rest-client
   rmagick
+  rollbar
   rspec
   rspec-rails
   sass-rails (~> 5.0)
@@ -303,4 +347,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.14.3
+   1.14.6
