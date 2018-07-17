@@ -2,7 +2,7 @@ module Secured
   extend ActiveSupport::Concern
 
   included do
-    before_action :logged_in_using_omniauth?
+    before_action :logged_in_using_omniauth? unless ENV['AUTH0_DISABLED'] == 'true'
   end
 
   def logged_in_using_omniauth?
